@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/vite": "^4.3.3",
     "bootstrap": "^5.3.8",
     "framer-motion": "^12.34.4",
+    "gsap": "^3.12.2",
     "lucide-react": "^0.576.0",
     "react": "^19.2.0",
     "react-bootstrap": "^2.10.10",
