@@ -1,102 +1,134 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Container } from 'react-bootstrap';
-import { ExternalLink, Rocket, ChevronUp, ChevronDown } from 'lucide-react';
-import { projects } from '../data/portfolioData.js';
+import { ExternalLink, Rocket, ChevronUp, ChevronDown, Github } from 'lucide-react';
 
 const Projects = ({ onUpClick, onDownClick }) => {
-  return (
-    <section id="projects" className="bg-mesh-dark min-h-screen flex flex-col items-center justify-center py-24 relative overflow-hidden">
+  const projects = [
+    {
+      title: "AI Chat Stream",
+      desc: "High-performance chat interface with real-time streaming via Gemini API.",
+      tech: ["React", "Gemini", "Framer"],
+      url: "https://ai-chat-stream.netlify.app/",
+      github: "https://github.com/buglessblessy" 
+    },
+    {
+      title: "AI Resume Builder",
+      desc: "AI content optimization platform with real-time PDF preview generation.",
+      tech: ["React 19", "TS", "Tailwind"],
+      url: "https://blessys-ai-resume-builder.netlify.app/",
+      github: "https://github.com/buglessblessy"
+    },
+    {
+      title: "Movie Search Portal",
+      desc: "Media discovery hub using OMDb API with optimized search debouncing.",
+      tech: ["React", "Axios", "Bootstrap"],
+      url: "https://blessys-movie-search-portal.netlify.app/",
+      github: "https://github.com/buglessblessy"
+    },
+    {
+      title: "GitHub Finder",
+      desc: "Tool to fetch GitHub data with error handling and skeleton loaders.",
+      tech: ["React", "GitHub API", "Tailwind"],
+      url: "https://blessys-github-finder.netlify.app/",
+      github: "https://github.com/buglessblessy"
+    },
+    {
+      title: "The Guessing Game",
+      desc: "Interactive logic game focused on JavaScript DOM and state logic.",
+      tech: ["JS (ES6+)", "HTML5", "CSS3"],
+      url: "https://blessys-guess-game.netlify.app/",
+      github: "https://github.com/buglessblessy"
+    }
+  ];
 
-      {/* UP ARROW */}
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
+  };
+
+  return (
+    <section id="projects" className="bg-[#050505] h-[100dvh] w-full flex flex-col items-center justify-center relative overflow-hidden">
+      
+      {/* Navigation Up - Adjusted to clear navbar space */}
       <motion.button 
         onClick={onUpClick} 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, -15, 0] }}
-        transition={{ opacity: { delay: 1, duration: 1 }, y: { duration: 4, repeat: Infinity, ease: "easeInOut" }}}
-        className="absolute top-10 left-1/2 -translate-x-1/2 bg-transparent border-none cursor-pointer group p-4 z-[100] outline-none"
+        className="absolute top-20 left-1/2 -translate-x-1/2 z-30 opacity-20 hover:opacity-100 transition-opacity"
       >
-        <div className="flex flex-col items-center gap-1">
-           <ChevronUp size={40} className="text-white/20 group-hover:text-indigo-400 transition-colors" />
-           <span className="text-[9px] font-black tracking-[0.4em] text-white/30 group-hover:text-indigo-400 transition-colors uppercase">Skills</span>
-        </div>
+        <ChevronUp size={24} className="text-white" />
       </motion.button>
 
-      {/* Background Glows */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-600/10 blur-[120px] rounded-full -z-10 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-emerald-600/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
-
-      <Container className="relative z-20">
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2 }}
-          className="text-center mb-20"
-        >
-          <span className="text-indigo-400 font-black tracking-[0.5em] text-[10px] uppercase">Case Studies</span>
-          <h2 className="text-6xl md:text-8xl font-black text-white mt-4 italic tracking-tighter">
+      <Container className="relative z-20 pt-16">
+        <div className="text-center mb-6">
+          <motion.h2 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-3xl md:text-5xl font-black text-white uppercase tracking-[0.2em] italic"
+          >
             WORKS<span className="text-indigo-500">.</span>
-          </h2>
-        </motion.div>
+          </motion.h2>
+        </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-5xl mx-auto px-4"
+        >
           {projects.map((p, i) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, y: -100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 100, damping: 15, delay: i * 0.2 }}
-              whileHover={{ y: -15 }} 
-              className="bg-white/5 border border-white/5 rounded-[3rem] p-10 hover:border-indigo-500/50 backdrop-blur-xl transition-all group relative overflow-visible select-text"
+              variants={itemVariants}
+              whileHover={{ y: -5 }} 
+              className={`bg-white/[0.02] border border-white/10 rounded-[1.5rem] p-4 md:p-5 hover:border-indigo-500/50 backdrop-blur-xl transition-all group flex flex-col justify-between min-h-[160px] md:min-h-[190px] ${
+                i >= 3 ? 'md:translate-x-1/2' : ''
+              }`}
             >
-              {/* Background Glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-              
-              {/* Card Content */}
-              <div className="relative z-10 flex flex-col">
-                <Rocket className="text-indigo-500 mb-8 opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all pointer-events-none" />
+              <div className="relative z-10">
+                <Rocket size={16} className="text-indigo-500 mb-2 opacity-40 group-hover:opacity-100 transition-all" />
+                <h3 className="text-md md:text-lg font-black text-white mb-1 tracking-tight leading-none uppercase">{p.title}</h3>
+                <p className="text-slate-400 text-[9px] md:text-[10px] mb-3 leading-snug line-clamp-2">{p.desc}</p>
 
-                <h3 className="text-3xl font-black text-white mb-4 tracking-tight select-text">{p.title}</h3>
-                <p className="text-slate-400 text-sm mb-8 leading-relaxed h-20 overflow-hidden select-text">{p.desc}</p>
-
-                <div className="flex flex-wrap gap-2 mb-10">
+                <div className="flex flex-wrap gap-1 mb-2">
                   {p.tech.map(t => (
-                    <span key={t} className="px-3 py-1 bg-white/5 text-indigo-300 rounded-lg text-[10px] font-black uppercase tracking-wider border border-white/5">
+                    <span key={t} className="px-1.5 py-0.5 bg-white/5 text-indigo-300 rounded-md text-[7px] font-bold uppercase border border-white/5">
                       {t}
                     </span>
                   ))}
                 </div>
+              </div>
 
+              <div className="relative z-10 flex items-center justify-between mt-auto pt-2 border-t border-white/5">
                 <a 
                   href={p.url} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="flex items-center gap-2 text-white font-black text-[10px] tracking-[0.2em] no-underline hover:text-indigo-400 transition uppercase cursor-pointer"
+                  className="flex items-center gap-1 text-white font-black text-[8px] tracking-widest no-underline hover:text-indigo-400 transition uppercase"
                 >
-                  Launch Project <ExternalLink size={14} />
+                  Launch <ExternalLink size={12} />
+                </a>
+                <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors">
+                  <Github size={14} />
                 </a>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </Container>
 
-      {/* DOWN ARROW */}
+      {/* Navigation Down */}
       <motion.button 
         onClick={onDownClick} 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 15, 0] }}
-        transition={{ opacity: { delay: 2 }, y: { duration: 4, repeat: Infinity, ease: "easeInOut" }}}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-transparent border-none cursor-pointer group p-4 z-[100] outline-none"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 opacity-20 hover:opacity-100 transition-opacity"
       >
-        <div className="flex flex-col items-center gap-2">
-           <span className="text-[9px] font-black tracking-[0.4em] text-white/30 group-hover:text-emerald-400 transition-colors uppercase">Contact</span>
-           <ChevronDown size={40} className="text-white/20 group-hover:text-emerald-400 transition-colors" />
-        </div>
+        <ChevronDown size={24} className="text-white" />
       </motion.button>
-
     </section>
   );
 };

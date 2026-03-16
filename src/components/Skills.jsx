@@ -1,116 +1,148 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Container } from 'react-bootstrap';
-import { Code2, Terminal, Cpu, Globe, Layout, Database, ChevronUp, ChevronDown, Layers, Smartphone } from 'lucide-react';
-import { skills } from '../data/portfolioData.js';
+import { 
+  Code2, Terminal, Cpu, Layout, 
+  Database, ChevronUp, ChevronDown, 
+  Smartphone, Github, GitBranch 
+} from 'lucide-react';
 
 const Skills = ({ onUpClick, onDownClick }) => {
-  const getIcon = (index) => {
-    const icons = [
-      <Layout size={24} />, <Code2 size={24} />, <Terminal size={24} />, 
-      <Globe size={24} />, <Cpu size={24} />, <Database size={24} />,
-      <Layers size={24} />, <Smartphone size={24} />
-    ];
-    return icons[index % icons.length];
+  const skillData = [
+    { name: "React", level: 95 },
+    { name: "JavaScript", level: 90 },
+    { name: "TypeScript", level: 85 },
+    { name: "HTML5", level: 95 },
+    { name: "CSS3", level: 90 },
+    { name: "Tailwind", level: 90 },
+    { name: "SASS", level: 85 },
+    { name: "Redux", level: 80 },
+    { name: "React Native", level: 80 },
+    { name: "Framer Motion", level: 85 },
+    { name: "Bootstrap", level: 85 },
+    { name: "REST API", level: 85 },
+    { name: "Git", level: 90 },
+    { name: "GitHub", level: 90 },
+    { name: "SQL", level: 80 },
+    { name: "Vite", level: 85 }
+  ];
+
+  const getIcon = (name) => {
+    const iconProps = { size: 16, strokeWidth: 1.5 };
+    switch (name) {
+      case "React": case "React Native": return <Smartphone {...iconProps} />;
+      case "JavaScript": case "TypeScript": return <Code2 {...iconProps} />;
+      case "HTML5": case "CSS3": case "Tailwind": return <Layout {...iconProps} />;
+      case "SQL": case "REST API": return <Database {...iconProps} />;
+      case "Git": return <GitBranch {...iconProps} />;
+      case "GitHub": return <Github {...iconProps} />;
+      case "Vite": return <Terminal {...iconProps} />;
+      default: return <Cpu {...iconProps} />;
+    }
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: -30, scale: 0.9 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { type: "spring", stiffness: 100, damping: 12 }
+    },
   };
 
   return (
-    <section id="skills" className="bg-mesh-dark min-h-screen flex flex-col items-center justify-center py-20 relative overflow-hidden">
-      
-      {/* RESTORED UP BUTTON */}
+    <section 
+      id="skills" 
+      className="bg-[#050505] h-[100dvh] w-full flex flex-col items-center justify-center relative overflow-hidden"
+    >
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-pink-600/5 blur-[120px] rounded-full pointer-events-none" />
+
+      {/* Navigation Up - Re-centered and adjusted for clearance */}
       <motion.button 
         onClick={onUpClick} 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, -15, 0] }}
-        transition={{ 
-          opacity: { delay: 1, duration: 1 },
-          y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-        }}
-        className="absolute top-10 left-1/2 -translate-x-1/2 bg-transparent border-none cursor-pointer group p-4 z-50 outline-none"
+        className="absolute top-20 left-1/2 -translate-x-1/2 z-50 p-2 opacity-20 hover:opacity-100 transition-opacity"
       >
-        <div className="flex flex-col items-center gap-1">
-           <ChevronUp size={40} className="text-white/20 group-hover:text-pink-500 transition-colors" />
-           <span className="text-[9px] font-black tracking-[0.4em] text-white/30 group-hover:text-pink-500 transition-colors uppercase">About</span>
-        </div>
+        <ChevronUp size={32} className="text-white" />
       </motion.button>
 
-      {/* Background Glows */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-600/10 blur-[120px] rounded-full -z-10" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-600/10 blur-[120px] rounded-full -z-10" />
-
-      <Container className="flex flex-col items-center">
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="text-center mb-12"
-        >
-          <span className="text-pink-500 font-black tracking-[0.5em] text-[10px] uppercase">Technical Stack</span>
-          <h2 className="text-6xl md:text-8xl font-black text-white mt-4 italic tracking-tighter uppercase">
+      {/* Content Container with pt-20 to clear navigation */}
+      <Container className="relative z-10 pt-20 pb-10">
+        <div className="text-center mb-10">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-black text-white uppercase tracking-[0.3em] italic"
+          >
             ARSENAL<span className="text-pink-500">.</span>
-          </h2>
-        </motion.div>
+          </motion.h2>
+          <p className="text-[9px] text-white/30 tracking-[0.5em] uppercase mt-2">Technical Proficiency</p>
+        </div>
 
-        {/* Centered Grid with updated responsive columns */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 w-full justify-center">
-          {skills.map((skill, i) => (
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 max-w-5xl mx-auto px-4 justify-items-center"
+        >
+          {skillData.map((skill, i) => (
             <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: -150 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 100, 
-                damping: 12, 
-                delay: i * 0.15 
-              }}
-              whileHover={{ 
-                scale: 1.05,
-                backgroundColor: "rgba(255, 255, 255, 0.08)",
-                transition: { duration: 0.2 } 
-              }}
-              className="group bg-white/5 border border-white/10 p-6 rounded-[2.5rem] text-center backdrop-blur-xl relative overflow-hidden flex flex-col items-center"
+              key={skill.name}
+              variants={itemVariants}
+              className="group w-full flex justify-center"
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-pink-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative z-10 w-full flex flex-col items-center">
-                <div className="text-white/30 group-hover:text-pink-400 transition-colors duration-500 mb-4">
-                  {getIcon(i)}
+              <motion.div 
+                whileHover={{ scale: 1.05, y: -5 }}
+                animate={{ y: [0, -4, 0] }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.1
+                }}
+                className="flex items-center gap-3 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-pink-500/50 px-4 py-3 rounded-full backdrop-blur-2xl transition-all duration-300 cursor-default shadow-2xl w-full justify-center max-w-[200px]"
+              >
+                <div className="text-white/40 group-hover:text-pink-400 transition-colors shrink-0">
+                  {getIcon(skill.name)}
                 </div>
-                <h4 className="text-white font-bold text-[10px] uppercase tracking-[0.2em] mb-4">{skill.name}</h4>
-                <div className="w-full bg-white/10 h-1 rounded-full overflow-hidden max-w-[100px]">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, delay: 1 + (i * 0.1) }} 
-                    className="h-full bg-gradient-to-r from-pink-500 to-indigo-500 shadow-[0_0_15px_rgba(236,72,153,0.5)]" 
-                  />
-                </div>
-              </div>
+
+                <span className="text-white font-medium text-[10px] md:text-[11px] uppercase tracking-widest whitespace-nowrap">
+                  {skill.name}
+                </span>
+
+                <motion.div 
+                  initial={{ width: 0, opacity: 0 }}
+                  whileHover={{ width: "auto", opacity: 1 }}
+                  className="overflow-hidden flex items-center border-l border-white/10 ml-1 pl-2 shrink-0"
+                >
+                  <span className="text-pink-500 font-black text-[9px] font-mono">
+                    {skill.level}%
+                  </span>
+                </motion.div>
+              </motion.div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </Container>
 
-      {/* DOWN ARROW */}
+      {/* Navigation Down */}
       <motion.button 
         onClick={onDownClick} 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 15, 0] }}
-        transition={{ 
-          opacity: { duration: 1 },
-          y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-        }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-transparent border-none cursor-pointer group p-4 z-50 outline-none"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 p-2 opacity-20 hover:opacity-100 transition-opacity"
       >
-        <div className="flex flex-col items-center gap-2">
-           <span className="text-[9px] font-black tracking-[0.4em] text-white/30 group-hover:text-emerald-400 transition-colors uppercase">Projects</span>
-           <ChevronDown size={40} className="text-white/20 group-hover:text-emerald-400 transition-colors" />
-        </div>
+        <ChevronDown size={32} className="text-white" />
       </motion.button>
-
     </section>
   );
 };
