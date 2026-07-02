@@ -8,40 +8,55 @@ const About = ({ onUpClick, onDownClick }) => {
   const [selectedRole, setSelectedRole] = useState(null);
 
   const experienceData = {
-    current: {
-      title: "Freelance React Developer",
-      date: "Sep 2025 – Present",
-      icon: <Briefcase size={20} className="text-indigo-400" />,
-      details: [
-        "Designing and developing high-performance React applications with a focus on scalable code.",
-        "Building interactive SPAs with dynamic components and smooth Framer Motion animations.",
-        "Translating complex UI/UX requirements into functional, pixel-perfect web interfaces.",
-        "Implementing best practices in Redux state management and performance optimization."
-      ]
-    },
-    sutherland: {
-      title: "React Trainee – Sutherland",
-      date: "July 2024 – Aug 2025",
-      icon: <Star size={20} className="text-emerald-400" />,
-      details: [
-        "Trained in modern frontend development using React.js and component-based architecture.",
-        "Worked on building responsive UI components using HTML, CSS, and JavaScript.",
-        "Learned best practices in state management, reusable components, and clean code structure.",
-        "Collaborated with mentors and teams to understand real-world product development workflows."
-      ]
-    },
-    mca: {
-      title: "MCA Graduate",
-      date: "Class of 2020",
-      icon: <BookOpen size={20} className="text-slate-400" />,
-      details: [
-        "Master of Computer Applications from Bharathiar University.",
-        "Graduated with a strong academic standing of 8.1 CGPA.",
-        "Specialized in Software Engineering and Modern Web Architectures.",
-        "Focus on building robust, logic-driven applications during core project phases."
-      ]
-    }
-  };
+current: {
+  title: "Frontend Engineer – RR IT Solutions",
+  date: "Aug 2025 – Present",
+  icon: <Briefcase size={24} className="text-indigo-400" />,
+  details: [
+    "Developing responsive and user-friendly web applications using React.js, TypeScript, HTML5, CSS3, and Tailwind CSS.",
+    "Building reusable UI components and integrating REST APIs to deliver dynamic business solutions.",
+    "Managing application state using Redux Toolkit, Context API, and React Router for scalable frontend architecture.",
+    "Improving application performance through lazy loading, code splitting, memoization, and API optimization techniques.",
+    "Collaborating with the development team using Git, GitHub, and Agile practices to deliver high-quality frontend solutions."
+  ]
+},
+
+  sutherland: {
+    title: "Seller Support Associate – Sutherland",
+    date: "Jul 2024 – Aug 2025",
+    icon: <Star size={24} className="text-amber-400" />,
+    details: [
+      "Provided voice and non-voice support to Amazon sellers.",
+      "Resolved account, payment, order, and policy-related issues while meeting SLA and quality standards.",
+      "Worked closely with internal teams to investigate and resolve customer issues.",
+      "Strengthened analytical thinking, communication, and customer relationship management skills."
+    ]
+  },
+
+  learning: {
+    title: "Independent React Development",
+    date: "2020 – 2024",
+    icon: <BookOpen size={24} className="text-emerald-400" />,
+    details: [
+      "Built multiple React applications to strengthen frontend development skills.",
+      "Developed reusable UI components using React.js, JavaScript, TypeScript, HTML5, CSS3, and Tailwind CSS.",
+      "Integrated REST APIs and implemented responsive, mobile-friendly user interfaces.",
+      "Practiced Redux Toolkit, Context API, React Router, Framer Motion, and modern React Hooks.",
+      "Completed Meta's React Basics and Advanced React certifications while continuously improving frontend engineering skills."
+    ]
+  },
+
+  education: {
+    title: "Master of Computer Applications (MCA)",
+    date: "2018 – 2020",
+    icon: <BookOpen size={24} className="text-sky-400" />,
+    details: [
+      "Graduated from Bharathiar University with a CGPA of 8.1.",
+      "Built a strong foundation in software engineering, databases, and web technologies.",
+      "Developed programming and problem-solving skills through academic projects."
+    ]
+  }
+};
 
   return (
     <section id="about" className="bg-[#050505] h-screen flex items-center justify-center relative overflow-hidden px-6">

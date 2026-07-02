@@ -4,19 +4,39 @@ import { Container } from "react-bootstrap";
 import { ChevronDown } from "lucide-react";
 import profileImg from "../assets/profile.png";
 
+
 const HeroSection = ({ onArrowClick }) => {
+  const texts = [
+    "Frontend Engineer",
+    "React.js Developer",
+    "Building Scalable Web Applications",
+    "TypeScript • Tailwind CSS • Redux Toolkit",
+    "Creating Modern User Experiences"
+  ];
+
+  const [textIndex, setTextIndex] = useState(0);
   const [typedText, setTypedText] = useState("");
-  const fullText = "Building Scalable SPAs with React.js";
 
   useEffect(() => {
-    let i = 0;
+    let currentText = texts[textIndex];
+    let index = 0;
+
     const typing = setInterval(() => {
-      setTypedText(fullText.slice(0, i + 1));
-      i++;
-      if (i === fullText.length) clearInterval(typing);
-    }, 120); 
+      setTypedText(currentText.slice(0, index + 1));
+      index++;
+
+      if (index === currentText.length) {
+        clearInterval(typing);
+
+        setTimeout(() => {
+          setTextIndex((prev) => (prev + 1) % texts.length);
+          setTypedText("");
+        }, 1800);
+      }
+    }, 80);
+
     return () => clearInterval(typing);
-  }, []);
+  }, [textIndex]);
 
   return (
     <section id="home" className="bg-mesh-dark h-screen flex items-center justify-center relative overflow-hidden">
@@ -75,10 +95,9 @@ const HeroSection = ({ onArrowClick }) => {
             </p>
 
             <div className="space-y-4 pt-4">
-               <p className="text-slate-300 text-lg leading-relaxed">
-                I’m <span className="text-white font-bold">Blessy A</span>, a dedicated React developer. 
-                I specialize in building interactive web applications and am ready to join your team.
-              </p>
+<p className="text-slate-300 text-lg leading-relaxed">
+  I'm <span className="text-white font-bold">Blessy A</span>, a Frontend Engineer with <span className="text-white font-semibold">1+ year of professional experience</span> building responsive and scalable web applications using React.js, TypeScript, JavaScript, and modern frontend technologies. With a strong foundation developed through continuous learning and hands-on projects since 2020, I enjoy creating intuitive user experiences, writing clean and maintainable code, and delivering high-quality frontend solutions.
+</p>
             </div>
           </motion.div>
         </div>
